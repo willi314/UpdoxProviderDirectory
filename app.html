@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>HTMLiveCode</title>
+    <link rel='stylesheet' type='text/css' href='app.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src='src/jquery.tablesorter.js'></script>
+    <script type="text/javascript" src='src/app.js'></script>
+</head>
+<body>
+<div id="providerInputDiv">
+    <form>
+        Last name:<br>
+        <label for="firstNameInput"></label><input type="text" id="firstNameInput"><br>
+        First name:<br>
+        <input type="text" id="lastNameInput"><br>
+        Email Address:<br>
+        <input type="text" id="emailAddressInput"><br>
+        Specialty:<br>
+        <input type="text" id="specialtyInput"><br>
+        Practice Name:<br>
+        <input type="text" id="practiceNameInput"><br>
+        <button type="button" id="providerSubmitButton">Submit</button>
+    </form>
+</div>
+<div id="providerDirectoryDiv">
+    <table id="providerDirectoryTable" class="tablesorter">
+        <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email Address</th>
+            <th>Specialty</th>
+            <th>Practice Name</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+</body>
+</html>
