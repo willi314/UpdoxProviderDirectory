@@ -1,6 +1,113 @@
 th {
     background-color: #4ECDC4;
 }
-* { border: 1px solid black; }
-table { border-collapse: collapse;}
-div {display: inline-block;}
+
+body{
+    background-color: #C0C0C0;
+}
+
+* {
+    /*border: 1px solid black;*/
+    font-family: 'Lato', sans-serif;
+}
+
+li{
+    padding: 0;
+    margin: 0;
+}
+
+li:nth-child(even){background-color: #f2f2f2}
+h1{margin-bottom: 0;}
+h2 {margin: 0;}
+p {margin: 0;}
+h3 {margin: 0;}
+
+#providerDirectoryDiv{
+    margin-top: 15px;
+}
+
+#sortDropDown{
+    display: inline-block;
+}
+
+#providerInputDiv {
+    display: inline-block;
+    height: 282px;
+    float: left;
+    padding: 2px;
+    margin: 0 15px 0 0;
+    background-color: #FFFFFF;
+}
+
+#providerInputForm{
+    height: 238px;
+    padding: 10px 0 0 0;
+}
+
+#providerSubmitButton{
+    margin-top: 5px;
+}
+
+#providerListDiv{
+    display: inline-block;
+    padding: 2px;
+    height: 282px;
+    width: 548px;
+    background-color: #FFFFFF;
+}
+
+#sortDirectionCheckboxContainer{
+    float: right;
+}
+
+#sortDropDown{
+    float: right;
+    display: inline-block;
+}
+
+#providerList{
+    list-style: none;
+    padding: 0;
+    margin: 7px 0 0 0;
+    border: 1px solid black;
+    max-height: 216px;
+    height: 218px;
+    width: 542px;
+    overflow-y: scroll;
+}
+
+#removeSelectedButton{
+    float: right;
+    margin: 5px 10px;
+}
+
+.providerListElement{
+    width: 525px;
+    padding: 0;
+    display: table;
+    border: 0 solid black;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    border-collapse: collapse;
+}
+
+.providerListElementLeftColumn{
+    display: table-cell;
+    vertical-align: middle;
+    width: 250px
+}
+
+.providerListElementRightColumn{
+    display:table-cell;
+    vertical-align: middle;
+    text-align: right;
+    width: 275px;
+    padding-right: 5px;
+}
+
+.providerListCheckboxHolder{
+    width: 30px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}

@@ -7,30 +7,66 @@ var existingData = '['+
     '{"last_name": "Juday", "first_name": "Tobin", "email_address": "tjuday@updox.com", "specialty": "General Medicine", "practice_name": "Juday Family Practice"}' +
     ']';
 var providerList = JSON.parse(existingData);
+var sortProperty = "last_name";
+
 $(document).ready(function() {
-    for(i = 0; i < providerList.length; i++){
-        $("#providerDirectoryTable tbody").append(createTableRowString(providerList, i));
-    }
-    $("#providerDirectoryTable").tablesorter( {sortList: [[0,0]]});
+    var providerDirectoryList = $("#providerList");
+    generateProviderList(providerDirectoryList);
+
+    $('#sortDropDown').change(function() {
+        sortProperty = $("#sortDropDown").val();
+        sortAndGenerateProviderList(providerDirectoryList);
+        $("#sortDropDown").val("sort_by");
+
+    });
+
+    $("#sortDirectionCheckbox").change(function(){
+        sortAndGenerateProviderList(providerDirectoryList);
+    });
+
+    $("#removeSelectedButton").click(function(){
+        for(var i = 0; i < providerList.length; i++){
+            var listIndexIsChecked = providerDirectoryList.find("li").eq(i).find("input").is(":checked");
+            if(listIndexIsChecked){
+                providerList.splice(i, 1);
+                providerDirectoryList.find("li").eq(i).remove();
+                i--;
+            }
+        }
+    });
+
     $("#providerSubmitButton").click(function(){
-        providerList.push({last_name: escapeHtml($("#lastNameInput").val()),
+        var newProvider = {last_name: escapeHtml($("#lastNameInput").val()),
             first_name: escapeHtml($("#firstNameInput").val()),
             email_address: escapeHtml($("#emailAddressInput").val()),
             specialty: escapeHtml($("#specialtyInput").val()),
-            practice_name: escapeHtml($("#practiceNameInput").val())});
-        $("#providerDirectoryTable tbody").append(createTableRowString(providerList, providerList.length -1));
-        $("#providerDirectoryTable").trigger("update");
-        $("#providerDirectoryTable").trigger("sorton");
-        $("#providerDirectoryTable").tablesorter();
+            practice_name: escapeHtml($("#practiceNameInput").val())};
+        if (/\S/.test(newProvider.last_name) && /\S/.test(newProvider.first_name) && /\S/.test(newProvider.email_address)) {
+            providerList.push(newProvider);
+            providerList.sort(dynamicSort(sortProperty));
+            providerDirectoryList.empty();
+            generateProviderList(providerDirectoryList);
+        }
+        else{
+            alert("First name, last name, and email address fields cannot be empty.");
+        }
     });
 });
 
-function createTableRowString(providerList, providerIndex){
-    return "<tr><td>" + providerList[providerIndex].last_name + "</td><td>" +
-        providerList[providerIndex].first_name + "</td><td>" +
-        providerList[providerIndex].email_address + "</td><td>" +
-        providerList[providerIndex].specialty + "</td><td>" +
-        providerList[providerIndex].practice_name + "</td></tr>";
+function createListElementString(providerList, providerIndex){
+    return "<li>" +
+        "<div class=\"providerListElement\">" +
+        "<div class=\"providerListCheckboxHolder\"><input type=\"checkbox\"></div>" +
+        "<div class=\"providerListElementLeftColumn\">" +
+        "<h3>" + providerList[providerIndex].last_name + ", " + providerList[providerIndex].first_name + "</h3>" +
+        "<p>" + providerList[providerIndex].email_address + "</p>" +
+        "</div>" +
+        "<div class=\"providerListElementRightColumn\">" +
+        "<h3 style=\"font-weight: normal\">" + providerList[providerIndex].practice_name + "</h3>" +
+        "<p>" + providerList[providerIndex].specialty + "</p>" +
+        "</div>" +
+        "</div>" +
+        "</li>";
 }
 
 function escapeHtml(unsafeText) {
@@ -42,3 +78,27 @@ function escapeHtml(unsafeText) {
         .replace(/'/g, "&#039;");
 }
 
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if($("#sortDirectionCheckbox").is(":checked")) {
+        sortOrder = -1;
+    }
+    return function (a,b) {
+        var result = (a[property].toLowerCase() < b[property].toLowerCase()) ? -1 : (a[property].toLowerCase() > b[property].toLowerCase()) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+function sortAndGenerateProviderList(providerDirectoryList){
+    if(sortProperty != "sort_by"){
+        providerList.sort(dynamicSort(sortProperty));
+        providerDirectoryList.empty();
+        generateProviderList(providerDirectoryList);
+    }
+}
+
+function generateProviderList(providerDirectoryList){
+    for(var i = 0; i < providerList.length; i++) {
+        providerDirectoryList.append(createListElementString(providerList, i));
+    }
+}

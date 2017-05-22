@@ -2,41 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>HTMLiveCode</title>
+    <title>Updox Provider Directory</title>
     <link rel='stylesheet' type='text/css' href='app.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src='src/jquery.tablesorter.js'></script>
     <script type="text/javascript" src='src/app.js'></script>
 </head>
 <body>
-<div id="providerInputDiv">
-    <form>
-        Last name:<br>
-        <label for="firstNameInput"></label><input type="text" id="firstNameInput"><br>
-        First name:<br>
-        <input type="text" id="lastNameInput"><br>
-        Email Address:<br>
-        <input type="text" id="emailAddressInput"><br>
-        Specialty:<br>
-        <input type="text" id="specialtyInput"><br>
-        Practice Name:<br>
-        <input type="text" id="practiceNameInput"><br>
-        <button type="button" id="providerSubmitButton">Submit</button>
-    </form>
-</div>
+<h1>Provider Directory</h1>
+<p>V2.0</p>
 <div id="providerDirectoryDiv">
-    <table id="providerDirectoryTable" class="tablesorter">
-        <thead>
-        <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Email Address</th>
-            <th>Specialty</th>
-            <th>Practice Name</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div id="providerInputDiv">Create Provider
+        <form id="providerInputForm">
+            Last name<br>
+            <input type="text" id="lastNameInput"><br>
+            First name<br>
+            <input type="text" id="firstNameInput"><br>
+            Email Address<br>
+            <input type="text" id="emailAddressInput"><br>
+            Specialty<br>
+            <input type="text" id="specialtyInput"><br>
+            Practice Name<br>
+            <input type="text" id="practiceNameInput"><br>
+            <button type="button" id="providerSubmitButton">Submit</button>
+        </form>
+    </div>
+    <div id="providerListDiv">Provider List
+        <div id="sortDirectionCheckboxContainer"><input type="checkbox" id="sortDirectionCheckbox">Sort Ascending</div>
+        <select id="sortDropDown">
+            <option value="sort_by">Sort By</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="email_address">Email Address</option>
+            <option value="specialty">Specialty</option>
+            <option value="practice_name">Practice Name</option>
+        </select>
+        <ul id="providerList">
+        </ul>
+        <button type="button" id="removeSelectedButton">Remove</button>
+    </div>
 </div>
 </body>
 </html>
